@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基于联盟链的跨境交易系统</title>
+    <link rel="stylesheet" href="/static/admin/css/index.css">
+</head>
+<body>
+<canvas class="cavs" width="1575" height="1337"></canvas>
+
+<div class="loginmain">
+    <div class="login-title">
+        <span>管理员登录</span>
+    </div>
+    <form  id="signupForm">
+    <div class="login-con">
+        <div class="login-user">
+            <div class="icon">
+                <img src="/static/admin/image/user_icon_copy.png" alt="">
+            </div>
+            <input type="text" name="username" placeholder="用户名" autocomplete="off" value="">
+        </div>
+        <div class="login-pwd">
+            <div class="icon">
+                <img src="/static/admin/image/lock_icon_copy.png" alt="">
+            </div>
+            <input type="password" name="password" placeholder="密码" autocomplete="off" value="">
+        </div>
+        <div class="login-yan">
+            <div class="icon">
+                <img src="/static/admin/image/key.png" alt="">
+            </div>
+            <input type="text" name="pwd2" placeholder="验证码" autocomplete="off" value="">
+        </div>
+
+        <div class="login-btn">
+            <input id="bu" type="button" value="登录">
+        </div>
+    </div>
+    </form>
+</div>
+
+</body>
+</html>
+
+<script src="/static/admin/js/jquery.min.js"></script>
+<script src="/static/admin/js/ban.js"></script>
+<script>
+
+    $("#bu").click(function () {
+        $.ajax({
+            type: "POST",   //提交的方法
+            url:"/admin/admin/loginv", //提交的地址
+            data:$('#signupForm').serialize(),// 序列化表单值
+            async: false,
+            error: function(request) {  //失败的话
+                alert("Connection error");
+            },
+            success: function(data) {  //成功
+                if (data == 2){
+                    alert("账号或者密码错误，请重新输入");
+                }else if (data==1){
+                    window.location.href = '/admin/admin/index';
+                }
+            }
+        });
+    });
+
+</script>

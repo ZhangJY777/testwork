@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>基于联盟链的跨境交易系统</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/static/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
+    <link rel="stylesheet" href="/static/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/static/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/assets/vendors/css/vendor.bundle.addons.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/static/assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="/static/assets/css/demo_1/style.css">
+    <!-- End Layout styles -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth register-bg-1 theme-one">
+          <div class="row w-100">
+            <div class="col-lg-4 mx-auto">
+              <h2 class="text-center mb-4">注册</h2>
+              <div class="auto-form-wrapper">
+                <form id="signupForm">
+                  <div class="form-group">
+                    <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" name="uname" class="form-control" placeholder="输入姓名">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="input-group">
+                      <input type="text" name="card" class="form-control" placeholder="输入身份证/统一社会信用代码">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" name="organization" class="form-control" placeholder="输入单位">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="text" name="username" class="form-control" placeholder="输入手机号（账号）">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="password" name="name" class="form-control" placeholder="输入密码">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="password" name="password" class="form-control" placeholder="确认密码">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-check-flat mt-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" checked> 同意平台协议 </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button id="bu" type="button" class="btn btn-primary submit-btn btn-block">注册</button>
+                  </div>
+                  <div class="text-block text-center my-3">
+                    <span class="text-small font-weight-semibold">已经有账户 ?</span>
+                    <a href="/admin/login" class="text-black text-small">登陆</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="/static/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="/static/assets/vendors/js/vendor.bundle.addons.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="/static/assets/js/shared/off-canvas.js"></script>
+    <script src="/static/assets/js/shared/misc.js"></script>
+    <!-- endinject -->
+    <script src="/static/assets/js/shared/jquery.cookie.js" type="text/javascript"></script>
+  </body>
+  <script>
+    function checkpassword() {
+        var password = document.getElementById("name").value;
+        var repassword = document.getElementById("password").value;
+        if(password!=repassword){
+            alert("两次输入密码不一致！请重新输入！")
+            document.getElementById('p1').value = "";
+            document.getElementById('p2').value = "";
+        }
+    }
+</script>
+<script>
+
+    $("#bu").click(function () {
+        $.ajax({
+            type: "POST",   //提交的方法
+            url:"/admin/register", //提交的地址
+            data:$('#signupForm').serialize(),// 序列化表单值
+            async: false,
+            error: function(request) {  //失败的话
+                alert("Connection error");
+            },
+            success: function(data) {  //成功
+                alert(data);
+            }
+        });
+    });
+
+</script>
+
+</html>

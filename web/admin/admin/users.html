@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - List</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="/static/favicon.ico"> <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content animated fadeInUp">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>用户信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+
+                        <table class="table table-hover">
+                            <tbody>
+                            {{- range $pd := .}}
+                                <tr>
+                                    <td class="project-status">
+                                        <small>用户身份:</small>
+                                        <br>
+                                        <span class="label label-primary">{{- $pd.Flag}}</span>
+                                    </td>
+                                    <td class="project-completion">
+                                        <small>用户编号:</small>
+                                        <br>
+                                        <a>{{- $pd.Id}}</a>
+
+                                    </td>
+                                    <td class="project-title">
+                                        <small>用户姓名:</small>
+                                        <br>
+                                        <a >{{- $pd.Name}}</a>
+                                    </td>
+                                    <td class="project-title">
+                                        <small>用户单位:</small>
+                                        <br>
+                                        <a>{{- $pd.Organization}}</a>
+                                    </td>
+                                    <td class="project-completion">
+                                        <small>用户身份证/统一社会信用代码:</small>
+                                        <br>
+                                        <a  >{{- $pd.IDCard}}</a>
+                                    </td>
+                                    <td class="project-actions">
+                                        <a href="/admin/admin/deletu?Name={{- $pd.Id}}&Flag=user" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> 删除 </a>
+                                    </td>
+                                </tr>
+                            {{end}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 全局js -->
+<script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
+
+
+<!-- 自定义js -->
+<script src="/static/js/content.js?v=1.0.0"></script>
+
+
+<script>
+    $(document).ready(function(){
+
+        $('#loading-example-btn').click(function () {
+            btn = $(this);
+            simpleLoad(btn, true)
+            simpleLoad(btn, false)
+        });
+    });
+
+    function simpleLoad(btn, state) {
+        if (state) {
+            btn.children().addClass('fa-spin');
+            btn.contents().last().replaceWith(" Loading");
+        } else {
+            setTimeout(function () {
+                btn.children().removeClass('fa-spin');
+                btn.contents().last().replaceWith(" Refresh");
+            }, 2000);
+        }
+    }
+</script>
+
+
+
+</body>
+</html>
